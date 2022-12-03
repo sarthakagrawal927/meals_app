@@ -5,6 +5,10 @@ import "../utils/dummy_data.dart";
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
 
+  final Function toggleFavorites;
+  final Function isFavorite;
+  MealDetailScreen(this.toggleFavorites, this.isFavorite);
+
   Widget buildSectionTitle(BuildContext context, String text) {
     // if the theme changes for some reason, then the entire MealsDetailScreen will rebuild because of the builder method using it. Thus it is better to use a stateless widget here. However theme wont change here.
     return Container(
@@ -87,10 +91,8 @@ class MealDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () {
-          Navigator.of(context).pop(mealId);
-        },
+        child: Icon(isFavorite(mealId) ? Icons.star : Icons.star_border),
+        onPressed: () => toggleFavorites(mealId),
       ),
     );
   }
