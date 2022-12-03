@@ -6,6 +6,7 @@ class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
 
   Widget buildSectionTitle(BuildContext context, String text) {
+    // if the theme changes for some reason, then the entire MealsDetailScreen will rebuild because of the builder method using it. Thus it is better to use a stateless widget here. However theme wont change here.
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Text(
@@ -84,6 +85,12 @@ class MealDetailScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.delete),
+        onPressed: () {
+          Navigator.of(context).pop(mealId);
+        },
       ),
     );
   }

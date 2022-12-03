@@ -11,6 +11,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeItem;
 
   const MealItem({
     Key key,
@@ -20,6 +21,7 @@ class MealItem extends StatelessWidget {
     @required this.duration,
     @required this.complexity,
     @required this.affordability,
+    @required this.removeItem,
   }) : super(key: key);
 
   String get complexityText {
@@ -55,7 +57,13 @@ class MealItem extends StatelessWidget {
       arguments: {
         'id': id,
       },
-    );
+    ).then((result) => {
+          if (result != null)
+            {
+              removeItem(result),
+            }
+        });
+    // pushNamed returns a future, which is resolved when the pushed page is popped or lifecycle of page is destroyed.
   }
 
   Widget build(BuildContext context) {
